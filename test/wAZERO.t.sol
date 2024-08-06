@@ -5,6 +5,10 @@ import {Test, console} from "forge-std/Test.sol";
 import {WAZERO} from "../src/wAZERO.sol";
 
 contract wAZEROTest is Test {
+    error InsufficientBalance();
+    error AzeroTransferFailed();
+    error InsufficientAllowance();
+
     WAZERO public wazero;
 
     function setUp() public {
@@ -30,11 +34,23 @@ contract wAZEROTest is Test {
         assertEq(wazero.totalSupply(), 500);
     }
 
+    function test_WithdrawNotEnoughTokens() public {
+        wazero.deposit{value: 1000}();
+        vm.expectRevert(InsufficientBalance.selector);
+        wazero.withdraw(1500);
+    }
+
     function test_Transfer() public {
         wazero.deposit{value: 1000}();
         wazero.transfer(address(2), 500);
         assertEq(wazero.balanceOf(address(2)), 500);
         assertEq(wazero.totalSupply(), 1000);
+    }
+
+    function test_TransferNotEnoughTokens() public {
+        wazero.deposit{value: 1000}();
+        vm.expectRevert(InsufficientBalance.selector);
+        wazero.transfer(address(2), 1500);
     }
 
     function test_TransferFrom() public {
@@ -44,6 +60,22 @@ contract wAZEROTest is Test {
         wazero.transferFrom(address(1), address(3), 500);
         assertEq(wazero.balanceOf(address(3)), 500);
         assertEq(wazero.totalSupply(), 1000);
+    }
+
+    function test_TransferFromNotEnoughTokens() public {
+        wazero.deposit{value: 1000}();
+        wazero.approve(address(2), 2000);
+        vm.startPrank(address(2));
+        vm.expectRevert(InsufficientBalance.selector);
+        wazero.transferFrom(address(1), address(3), 1500);
+    }
+
+    function test_TransferFromNotEnoughAllowance() public {
+        wazero.deposit{value: 1000}();
+        wazero.approve(address(2), 500);
+        vm.startPrank(address(2));
+        vm.expectRevert(InsufficientAllowance.selector);
+        wazero.transferFrom(address(1), address(3), 600);
     }
 
     function test_InfiniteApprove() public {
