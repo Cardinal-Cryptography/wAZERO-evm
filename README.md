@@ -1,66 +1,31 @@
-## Foundry
+## Wrapped AZERO Solidity implementation
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A simple AZERO wrapped token based on WETH9 Solidity implementation.
 
-Foundry consists of:
+### Testing
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+To test the contract, run the following commands:
 
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```bash
+forge test
 ```
 
-### Test
+### Deployment
 
-```shell
-$ forge test
+To deploy the contract, run the following commands:
+
+```bash
+forge deploy ???
 ```
 
-### Format
+## Addresses and ABIs
 
-```shell
-$ forge fmt
-```
+Contract ABI can be found in the `abi` directory.
 
-### Gas Snapshots
+Addresses of deployed (and verified contracts) for Aleph Zero EVM networks:
 
-```shell
-$ forge snapshot
-```
+- Testnet: `???`
+- Mainnet: `???`
 
-### Anvil
 
-```shell
-$ anvil
-```
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
