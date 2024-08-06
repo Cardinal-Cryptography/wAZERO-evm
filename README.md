@@ -15,7 +15,10 @@ forge test
 To deploy the contract, run the following commands:
 
 ```bash
-forge deploy ???
+forge create --rpc-url <your_rpc_url> \
+    --private-key <your_private_key> \
+    --verify \
+    src/wAZERO.sol:WAZERO
 ```
 
 ## Addresses and ABIs
