@@ -20,6 +20,10 @@ contract WAZERO {
     string public symbol = "WAZERO";
     uint8 public decimals = 18;
 
+    error InsufficientBalance();
+    error AzeroTransferFailed();
+    error InsufficientAllowance();
+
     event Approval(address indexed src, address indexed guy, uint256 wad);
     event Transfer(address indexed src, address indexed dst, uint256 wad);
     event Deposit(address indexed dst, uint256 wad);
@@ -38,10 +42,15 @@ contract WAZERO {
     }
 
     function withdraw(uint256 wad) public {
-        require(balanceOf[msg.sender] >= wad, "");
+        if (balanceOf[msg.sender] < wad) {
+            revert InsufficientBalance();
+        }
+
         balanceOf[msg.sender] -= wad;
         (bool success, ) = msg.sender.call{value: wad}("");
-        require(success, "");
+        if (!success) {
+            revert AzeroTransferFailed();
+        }
         emit Withdrawal(msg.sender, wad);
     }
 
@@ -64,10 +73,14 @@ contract WAZERO {
         address dst,
         uint256 wad
     ) public returns (bool) {
-        require(balanceOf[src] >= wad, "");
+        if(balanceOf[src] < wad) {
+            revert InsufficientBalance();
+        }
 
         if (src != msg.sender && allowance[src][msg.sender] != 2 ** 256 - 1) {
-            require(allowance[src][msg.sender] >= wad, "");
+            if (allowance[src][msg.sender] < wad) {
+                revert InsufficientAllowance();
+            }
             allowance[src][msg.sender] -= wad;
         }
 
