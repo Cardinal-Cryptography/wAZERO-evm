@@ -23,7 +23,7 @@ forge create --rpc-url <your_rpc_url> \
 
 ## Addresses and ABIs
 
-Contract ABI can be found in the `abi` directory.
+Contract ABI and bytecode can be found in the `artifacts` directory.
 
 Addresses of deployed (and verified contracts) for Aleph Zero EVM networks:
 
