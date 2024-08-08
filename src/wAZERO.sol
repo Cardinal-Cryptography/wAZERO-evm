@@ -77,7 +77,7 @@ contract WAZERO {
             revert InsufficientBalance();
         }
 
-        if (src != msg.sender && allowance[src][msg.sender] != 2 ** 256 - 1) {
+        if (src != msg.sender && allowance[src][msg.sender] != type(uint256).max) {
             if (allowance[src][msg.sender] < wad) {
                 revert InsufficientAllowance();
             }
