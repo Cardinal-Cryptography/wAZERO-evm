@@ -43,6 +43,7 @@ contract wAZEROTest is Test {
     function test_Transfer() public {
         wazero.deposit{value: 1000}();
         wazero.transfer(address(2), 500);
+        assertEq(wazero.balanceOf(address(1)), 500);
         assertEq(wazero.balanceOf(address(2)), 500);
         assertEq(wazero.totalSupply(), 1000);
     }
