@@ -1,4 +1,7 @@
-// Copyright (C) 2015, 2016, 2017 Dapphub
+// SPDX-License-Identifier: GNU GPLv3
+
+// Copyright (C) 2015, 2016, 2017 
+// Modified by Cardinal Cryptography, 2024
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -13,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity >=0.6.6;
+pragma solidity ^0.8.20;
 
 contract WAZERO {
     string public name = "Wrapped AZERO";
