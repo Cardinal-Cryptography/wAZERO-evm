@@ -28,7 +28,7 @@ Contract ABI and bytecode can be found in the `artifacts` directory.
 Addresses of deployed (and verified contracts) for Aleph Zero EVM networks:
 
 - Testnet: `0xcC1141eEd15EB519b08cA38A2Ee75AB8025F0DA9`
-- Mainnet: `???`
+- Mainnet: `0xb7Da55D7040ef9C887e20374D76A88F93A59119E`
 
 
 
